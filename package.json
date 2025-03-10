@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "release": "node scripts/release.mjs"
+  },
+  "dependencies": {
+    "@actions/github": "6.0.0",
+    "node-fetch": "3.3.2"
+  }
+}
