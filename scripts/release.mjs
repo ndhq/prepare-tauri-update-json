@@ -39,17 +39,17 @@ async function createTauriRelease() {
   const promises = latestAssets.map(async (asset) => {
     const { name, browser_download_url } = asset;
 
-    if (/\.msi\.zip$/.test(name)) {
+    if (/\.msi$/.test(name)) {
       windowsX86_64.url = browser_download_url;
     }
-    if (/\.msi\.zip\.sig$/.test(name)) {
+    if (/\.msi\.sig$/.test(name)) {
       windowsX86_64.signature = await getAssetSign(browser_download_url);
     }
 
-    if (/\.AppImage\.tar\.gz$/.test(name)) {
+    if (/\.AppImage$/.test(name)) {
       linuxX86_64.url = browser_download_url;
     }
-    if (/\.AppImage\.tar\.gz\.sig$/.test(name)) {
+    if (/\.AppImage\.sig$/.test(name)) {
       linuxX86_64.signature = await getAssetSign(browser_download_url);
     }
 
@@ -79,7 +79,7 @@ async function createTauriRelease() {
   await Promise.allSettled(promises);
 
   const releaseData = {
-    name: latestTag.name,
+    version: latestTag.name,
     notes: `https://github.com/${repoMetaData.owner}/${repoMetaData.repo}/releases/tag/${latestTag.name}`,
     pub_date: new Date().toISOString(),
     platforms: {},
