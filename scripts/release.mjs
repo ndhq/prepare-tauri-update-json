@@ -79,7 +79,7 @@ async function createTauriRelease() {
   await Promise.allSettled(promises);
 
   const releaseData = {
-    version: latestTag.name,
+    version: process.env.VERSION_TAG || latestTag.name,
     notes: `https://github.com/${repoMetaData.owner}/${repoMetaData.repo}/releases/tag/${latestTag.name}`,
     pub_date: new Date().toISOString(),
     platforms: {},
